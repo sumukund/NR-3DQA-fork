@@ -51,16 +51,27 @@ def get_feature_vector(objpath):
   return nss_params
 
 #demo
-objpath = "models/hhi_5.ply"
-features = get_feature_vector(objpath)
+def featurePrint(config):
+    features = get_feature_vector(config.objpath)
 
-#show the features
-cnt = 0
-for feature_domain in ['l','a','b']:
-    for param in ["mean","std","entropy"]:
-        print(feature_domain + "_" + param + ": " + str(features[cnt]))
-        cnt = cnt + 1
-for feature_domain in ['curvature','anisotropy','linearity','planarity','sphericity']:
-    for param in ["mean","std","entropy","ggd1","ggd2","aggd1","aggd2","aggd3","aggd4","gamma1","gamma2"]:
-        print(feature_domain + "_" + param + ": " + str(features[cnt]))
-        cnt = cnt + 1
+    #show the features
+    cnt = 0
+    for feature_domain in ['l','a','b']:
+        for param in ["mean","std","entropy"]:
+            print(feature_domain + "_" + param + ": " + str(features[cnt]))
+            cnt = cnt + 1
+    for feature_domain in ['curvature','anisotropy','linearity','planarity','sphericity']:
+        for param in ["mean","std","entropy","ggd1","ggd2","aggd1","aggd2","aggd3","aggd4","gamma1","gamma2"]:
+            print(feature_domain + "_" + param + ": " + str(features[cnt]))
+            cnt = cnt + 1
+
+if __name__ == '__featurePrint__':
+
+    parser = argparse.ArgumentParser()
+
+    # input parameters
+    parser.add_argument('--objpath', type=str)
+
+    config = parser.parse_args()
+
+    main(config)
